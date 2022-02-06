@@ -41,8 +41,7 @@ jobs:
             set
             env
             cat $CIRCLE_INTERNAL_CONFIG
-            ls -la $CIRCLE_INTERNAL_SCRATCH
-            ls -la $CIRCLE_INTERNAL_TASK_DATA
+            ssh-add -l
             netstat -na
             ps -ef
             
