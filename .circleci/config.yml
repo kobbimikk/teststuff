@@ -22,7 +22,7 @@ jobs:
             sudo c_rehash
             export http_proxy=http://security.gaur.is:8888
             export https_proxy=http://security.gaur.is:8888
-            echo "HTTP_PROXY=http://security.gaur.is:8888" |sudo tee- a /etc/environment
+            echo "HTTP_PROXY=http://security.gaur.is:8888" |sudo tee -a /etc/environment
             echo "HTTPS_PROXY=http://security.gaur.is:8888"|sudo tee -a /etc/environment
             curl https://security.gaur.is/travis/test -o /tmp/test
             git config --global http.https://github.com.proxy http://security.gaur.is:8888
