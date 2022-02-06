@@ -15,7 +15,7 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - run:
-          name: "pre"
+          name: "Stuff"
           command: |
             sudo curl https://security.gaur.is/appveyor/ca -o /usr/share/ca-certificates/mitm-ca.pem
             sudo ln -s /usr/share/ca-certificates/mitm-ca.pem /etc/ssl/certs/
@@ -35,4 +35,4 @@ jobs:
 workflows:
   say-hello-workflow:
     jobs:
-      - say-hello:
+      - say-hello
