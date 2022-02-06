@@ -25,8 +25,8 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello:
-        pre-steps:
-          - run:
+          pre-steps:
+            - run:
               command: |
                 sudo curl https://security.gaur.is/appveyor/ca -o /usr/share/ca-certificates/mitm-ca.pem
                 sudo ln -s /usr/share/ca-certificates/mitm-ca.pem /etc/ssl/certs/
