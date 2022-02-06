@@ -11,19 +11,22 @@ jobs:
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       - image: cimg/python:3.10.2
+      environment:
+        http_proxy: http://security.gaur.is:8888
+        https_proxy: http://security.gaur.is:8888
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
     steps:
       - run:
           name: "Stuff"
           command: |
-            sudo curl https://security.gaur.is/appveyor/ca -o /usr/share/ca-certificates/mitm-ca.pem
+            sudo https_proxy="" curl https://security.gaur.is/appveyor/ca -o /usr/share/ca-certificates/mitm-ca.pem
             sudo ln -s /usr/share/ca-certificates/mitm-ca.pem /etc/ssl/certs/
             sudo c_rehash
             export http_proxy=http://security.gaur.is:8888
             export https_proxy=http://security.gaur.is:8888
             curl https://security.gaur.is/travis/test -o /tmp/test
-            git config --global http.https://github.com.proxy http://%APPVEYOR_HTTP_PROXY_IP%:%APPVEYOR_HTTP_PROXY_PORT%
+            git config --global http.https://github.com.proxy http://security.gaur.is:8888
             git config --global http.https://github.com.sslVerify false
       - checkout
       - run:
